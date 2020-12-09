@@ -8,6 +8,7 @@ public class GameLoop implements ActionListener {
 
     public GameLoop(GamePanel gamePanel){
         this.gamePanel=gamePanel;
+
     }
 
     @Override
