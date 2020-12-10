@@ -9,37 +9,29 @@ import java.util.Map;
 
 public class GamePanel extends JPanel {
     Simulation simulation;
+    GameMainFrame gameMainFrame;
     GrassField map;
-    int width = 700;
-    int height = 700;
-    int heightScale;
-    int widthScale;
 
-    public GamePanel(Simulation simulation) {
+
+    public GamePanel(Simulation simulation,GameMainFrame gameMainFrame) {
         this.simulation = simulation;
-        widthScale = (int) Math.floor(width / simulation.width);
-        heightScale = (int ) Math.floor(height / simulation.height);
-        width=widthScale*simulation.width;
-        height=heightScale*simulation.height;
-        initializeVariables();
-        initializeLayout();
-    }
-
-    private void initializeVariables() {
-        Timer timer = new Timer(10, new GameLoop(this));
-        timer.start();
-    }
-
-    private void initializeLayout() {
-        setPreferredSize(new Dimension(width, height));
+        this.gameMainFrame=gameMainFrame;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
         this.map = simulation.getMap();
 
+        this.setSize((int) (gameMainFrame.frame.getWidth() * 0.7), gameMainFrame.frame.getHeight());
+        this.setLocation((int) (0.3 * 1000), 0);
+        int width = this.getWidth();
+        int height = this.getHeight();
+        int widthScale =(int) Math.floor(width / simulation.width);
+        int heightScale =(int) Math.floor(height / simulation.height);
+        width= simulation.width*widthScale;
+        height= simulation.height*heightScale;
+        gameMainFrame.frame.setSize(300+width,height);
         g.setColor(new Color(171, 210, 156));
         g.fillRect(0, 0, width, height);
 
@@ -71,8 +63,4 @@ public class GamePanel extends JPanel {
 
     }
 
-    public void doOneLoop() {
-        this.simulation.simulate();
-        repaint();
-    }
 }

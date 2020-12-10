@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Simulation {
-    int day;
+    public int day;
     GrassField map;
     RectangularMap jungleArea;
     RectangularMap areaOfMap;
@@ -17,6 +17,7 @@ public class Simulation {
     public int jungleWidth;
     public int jungleHeight;
     int moveEnergyCost;
+    public int howManyAnimals=0;
 
 
     public Simulation(int width,int height,int howManyAnimalsAtStart,int animalEnergy,int grassEnergy,int moveEnergyCost,int junglePrecentage){
@@ -45,12 +46,14 @@ public class Simulation {
         eatGrass(animals,grasses);
         breedAnimals(animals);
         generateGrass();
+        day++;
     }
 
     void createAnimals(int howManyAnimals){
         for(int i=0;i<howManyAnimals;i++){
             Vector2d animalPosition = map.getUnocuppiedPosition();
             if(animalPosition!=null){
+                this.howManyAnimals++;
                 map.addAnimal(Animal.buildAnimal().withBirthDay(day).withPosition(animalPosition).withEnergy(animalEnergy).build());
             }
         }
@@ -58,12 +61,11 @@ public class Simulation {
     void removeDeadAnimals(Map<Vector2d,List<Animal>> animals){
         List<Animal> animalsAtPosition = new ArrayList<>();
         for(Map.Entry<Vector2d,List<Animal>> entry : animals.entrySet()){
-            for(Animal animal : entry.getValue()){
-                animalsAtPosition.add(animal);
-            }
+            animalsAtPosition.addAll(entry.getValue());
         }
         for(Animal animal : animalsAtPosition){
             if(animal.isDead(day)){
+                this.howManyAnimals--;
                 map.removeAnimal(animal.getPosition(),animal);
             }
         }
@@ -106,6 +108,7 @@ public class Simulation {
                 }
                 Animal baby = animalsAtPosition.get(x).breed(animalsAtPosition.get(y),map.getSurroundedPosition(entry.getKey()),day);
                 if(baby!=null) {
+                    this.howManyAnimals++;
                     map.addAnimal(baby);
                 }
             }
