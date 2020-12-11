@@ -9,7 +9,7 @@ public class Animal {
     private MapDirection direction;
     public ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
     private Genotype genotype;
-    int birthDay;
+    public int birthDay;
     int deathDay = 0;
     Set<Animal> children = new HashSet<>();
     private int energy;
@@ -29,9 +29,6 @@ public class Animal {
         return this.position;
     }
 
-    public MapDirection getOrientation(){
-        return this.direction;
-    }
 
     public static buildNewAnimal buildAnimal(){
         return new buildNewAnimal();

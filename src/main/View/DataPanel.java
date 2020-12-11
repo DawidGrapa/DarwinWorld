@@ -3,25 +3,54 @@ package View;
 import agh.cs.DarwinsGame.GrassField;
 import agh.cs.DarwinsGame.Simulation;
 
+
 import javax.swing.*;
-import java.awt.*;
+
 
 public class DataPanel extends JPanel {
     Simulation simulation;
-    GrassField map;
     GameMainFrame gameMainFrame;
+    private JLabel days = new JLabel();
+    private JLabel animals = new JLabel();
+    private JLabel grasses = new JLabel();
+    private JLabel dominatingGenotype = new JLabel();
+    private JLabel averageAlive = new JLabel();
+    private JLabel averageDead = new JLabel();
+    private JLabel childs = new JLabel();
+    private ButtonPanel buttonPanel;
+
+
     public DataPanel(Simulation simulation,GameMainFrame gameMainFrame){
         this.simulation=simulation;
         this.gameMainFrame=gameMainFrame;
+
+        setSize(700,500);
+        setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+
+        this.days.setText("Day: "+this.simulation.day);
+        add(this.days);
+        this.animals.setText("Animals: "+this.simulation.howManyAnimals);
+        add(this.animals);
+        this.grasses.setText("Grasses: "+this.simulation.getMap().getGrassHashMap().size());
+        add(this.grasses);
+        this.dominatingGenotype.setText("Dominating Genotype: "+0);
+        add(this.dominatingGenotype);
+        this.averageAlive.setText("Average energy for alive animals: "+simulation.getAverageEnergy());
+        add(this.averageAlive);
+        this.averageDead.setText("Average age for dead animals: "+simulation.getAverageDaysForDeadAnimals());
+        add(this.averageDead);
+        this.childs.setText("Average number of childs for alive animals: "+simulation.getAverageChild());
+        add(this.childs);
+        this.buttonPanel = new ButtonPanel(this.gameMainFrame);
+        add(this.buttonPanel);
     }
-    @Override
-    protected void paintComponent(Graphics g){
-        super.paintComponent(g);
-        map=simulation.getMap();
-        this.setSize((int) (gameMainFrame.frame.getWidth() * 0.3), gameMainFrame.frame.getHeight());
-        this.setLocation(0, 0);
-        g.drawString("Total days: " + simulation.day, 10, 20 );
-        g.drawString("Grasses: "+simulation.getMap().getGrassHashMap().size(),10,40);
-        g.drawString("Animals: "+simulation.howManyAnimals,10,60);
+    public void updateData(){
+        this.days.setText("Day: "+this.simulation.day);
+        this.animals.setText("Animals: "+this.simulation.howManyAnimals);
+        this.grasses.setText("Grasses: "+this.simulation.getMap().getGrassHashMap().size());
+        this.averageAlive.setText("Average energy for alive animals: "+simulation.getAverageEnergy());
+        this.averageDead.setText("Average age for dead animals: "+simulation.getAverageDaysForDeadAnimals());
+        this.childs.setText("Average number of childs for alive animals: "+simulation.getAverageChild());
     }
+
 }

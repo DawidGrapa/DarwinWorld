@@ -9,7 +9,7 @@ public class Genotype {
     public int genomeSize = 32;
     public int howManyGenes=8;
     int [] isThereEveryGene = new int[howManyGenes];
-    List<Integer> genes = new ArrayList<>(32);
+    public List<Integer> genes = new ArrayList<>(32);
 
     Genotype(){
         for(int i=0;i<howManyGenes;i++){

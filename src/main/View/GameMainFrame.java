@@ -16,20 +16,23 @@ public class GameMainFrame implements ActionListener {
 
     public GameMainFrame(Simulation simulation){
         this.simulation=simulation;
-        timer = new Timer(100,this);
+        timer = new Timer(simulation.delay,this);
 
         frame = new JFrame("Evolution Simulator");
-        frame.setSize(1000, 1000);
-        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setPreferredSize(new Dimension(1400,700));
+        frame.setResizable(false);
         frame.setVisible(true);
+        frame.setLocation(30,50);
+
 
         gamePanel = new GamePanel(this.simulation,this);
-        gamePanel.setSize(new Dimension(1, 1));
         dataPanel = new DataPanel(this.simulation,this);
-        dataPanel.setSize(1,1);
-        frame.add(gamePanel);
+
+        frame.setLayout(new GridLayout(1,2));
         frame.add(dataPanel);
+        frame.add(gamePanel);
+        frame.pack();
 
     }
 
@@ -39,7 +42,7 @@ public class GameMainFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        dataPanel.repaint();
+        dataPanel.updateData();
         gamePanel.repaint();
         simulation.simulate();
     }

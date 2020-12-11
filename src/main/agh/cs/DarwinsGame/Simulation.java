@@ -18,9 +18,14 @@ public class Simulation {
     public int jungleHeight;
     int moveEnergyCost;
     public int howManyAnimals=0;
+    private int averageEnergy = 0;
+    private int howManyDeadAnimals=0;
+    private int howManyDaysForDeadAnimals=0;
+    private int averageChild;
+    public int delay;
 
 
-    public Simulation(int width,int height,int howManyAnimalsAtStart,int animalEnergy,int grassEnergy,int moveEnergyCost,int junglePrecentage){
+    public Simulation(int width,int height,int howManyAnimalsAtStart,int animalEnergy,int grassEnergy,int moveEnergyCost,int junglePrecentage,int delay){
         day =0;
         areaOfMap = new RectangularMap(new Vector2d(0,0),new Vector2d(width-1,height-1));
         jungleLowerLeft = new Vector2d( width/2-width*junglePrecentage/200, height/2-height*junglePrecentage/200);
@@ -35,6 +40,7 @@ public class Simulation {
         jungleWidth=jungleUpperRight.x-jungleLowerLeft.x+1;
         jungleHeight = jungleUpperRight.y-jungleLowerLeft.y+1;
         this.moveEnergyCost=moveEnergyCost;
+        this.delay=delay;
     }
 
     public void simulate(){
@@ -66,6 +72,8 @@ public class Simulation {
         for(Animal animal : animalsAtPosition){
             if(animal.isDead(day)){
                 this.howManyAnimals--;
+                this.howManyDeadAnimals++;
+                this.howManyDaysForDeadAnimals+=(this.day-animal.birthDay);
                 map.removeAnimal(animal.getPosition(),animal);
             }
         }
@@ -73,11 +81,15 @@ public class Simulation {
 
 
     void moveAnimals(Map<Vector2d,List<Animal>> animals){
+        this.averageEnergy=0;
+        this.averageChild=0;
         List<Animal> animalsAtPosition = new ArrayList<>();
         for(Map.Entry<Vector2d,List<Animal>> entry : animals.entrySet()){
             animalsAtPosition.addAll(entry.getValue());
         }
         for(Animal animal : animalsAtPosition){
+            averageChild+=animal.howManyChildren();
+            averageEnergy+=animal.getEnergy();
             animal.move();
             animal.decreaseEnergy(moveEnergyCost);
         }
@@ -167,4 +179,18 @@ public class Simulation {
         return this.map;
     }
 
+    public int getAverageEnergy(){
+        return this.averageEnergy;
+    }
+    public int getAverageDaysForDeadAnimals(){
+        if(howManyDeadAnimals!=0)
+        return howManyDaysForDeadAnimals/howManyDeadAnimals;
+        else return 0;
+    }
+    public int getAverageChild(){
+        if(howManyAnimals!=0)
+        return averageChild/howManyAnimals;
+        else
+            return 0;
+    }
 }
