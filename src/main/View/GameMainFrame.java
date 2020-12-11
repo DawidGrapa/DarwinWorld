@@ -1,14 +1,17 @@
 package View;
 
 import agh.cs.DarwinsGame.Simulation;
+import agh.cs.DarwinsGame.Vector2d;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class GameMainFrame implements ActionListener {
-    Simulation simulation;
+    public Simulation simulation;
     public JFrame frame;
     public Timer timer;
     public GamePanel gamePanel;
@@ -34,10 +37,13 @@ public class GameMainFrame implements ActionListener {
         frame.add(gamePanel);
         frame.pack();
 
+
+
     }
 
     public void startSimulation(){
         timer.start();
+
     }
 
     @Override

@@ -26,7 +26,10 @@ public class GamePanel extends JPanel {
         this.height=heightScale*this.simulation.height;
         setSize(new Dimension(this.width,this.height));
         gameMainFrame.frame.setPreferredSize(new Dimension(700+width,height+28)); //tutaj prosze wpisac wysokosc paska narzedzi, inaczej sie zepsuje :))
+
     }
+
+
 
     @Override
     protected void paintComponent(Graphics g) {

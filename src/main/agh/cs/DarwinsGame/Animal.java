@@ -14,6 +14,7 @@ public class Animal {
     Set<Animal> children = new HashSet<>();
     private int energy;
     private Vector2d position;
+    public int howManyAncestors=0;
 
 
     public void setPosition(Vector2d position) {
@@ -81,6 +82,7 @@ public class Animal {
             baby = Animal.buildAnimal().withPosition(position).withBirthDay(birthDay).withEnergy(energy).withGenotype(genotype).build();
             parent1.children.add(baby);
             parent2.children.add(baby);
+            baby.howManyAncestors= parent1.howManyAncestors+parent2.howManyAncestors+2;
         }
         return baby;
 
