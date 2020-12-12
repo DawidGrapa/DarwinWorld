@@ -51,6 +51,10 @@ public class GamePanel extends JPanel {
             }
 
             for (Animal a : animalsAtPosition) {
+                if(a.equals(gameMainFrame.dataPanel.buttonPanel.animal)){
+                    g.setColor(new Color(255,0,0));
+                }
+                else
                 g.setColor(a.toColor(simulation.animalEnergy));
                 int y = a.getPosition().y * heightScale;
                 int x = a.getPosition().x * widthScale;
@@ -65,7 +69,7 @@ public class GamePanel extends JPanel {
             }
 
         }
-        else{
+        else {
             g.setColor(new Color(171, 210, 156));
             g.fillRect(0, 0, width, height);
 
@@ -89,7 +93,7 @@ public class GamePanel extends JPanel {
 
             for (Animal a : animalsAtPosition) {
                 if(a.getBestGene()==simulation.getDominatingGene()){
-                    g.setColor(new Color(255, 0, 0));
+                    g.setColor(new Color(255, 230, 0));
                     int y = a.getPosition().y * heightScale;
                     int x = a.getPosition().x * widthScale;
                     g.fillOval(x, y, widthScale, heightScale);

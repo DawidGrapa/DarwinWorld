@@ -8,7 +8,7 @@ public class Simulation {
     GrassField map;
     RectangularMap jungleArea;
     RectangularMap areaOfMap;
-    int grassEnergy;
+    public int grassEnergy;
     public int animalEnergy;
     public int width;
     public int height;
@@ -16,7 +16,7 @@ public class Simulation {
     public Vector2d jungleLowerLeft;
     public int jungleWidth;
     public int jungleHeight;
-    int moveEnergyCost;
+    public int moveEnergyCost;
     public int howManyAnimals=0;
     private int averageEnergy = 0;
     private int howManyDeadAnimals=0;
@@ -24,16 +24,20 @@ public class Simulation {
     private int averageChild;
     public int delay;
     public int [] dominatingGenotype  = new int[8];
+    public int getHowManyAnimalsAtStart;
+    public int junglePercentage;
 
 
-    public Simulation(int width,int height,int howManyAnimalsAtStart,int animalEnergy,int grassEnergy,int moveEnergyCost,int junglePrecentage,int delay){
+    public Simulation(int width,int height,int howManyAnimalsAtStart,int animalEnergy,int grassEnergy,int moveEnergyCost,int junglePercentage,int delay){
         day =0;
+        this.junglePercentage=junglePercentage;
         areaOfMap = new RectangularMap(new Vector2d(0,0),new Vector2d(width-1,height-1));
-        jungleLowerLeft = new Vector2d( width/2-width*junglePrecentage/200, height/2-height*junglePrecentage/200);
-        jungleUpperRight = new Vector2d(width/2+width*junglePrecentage/200,height/2+height*junglePrecentage/200);
+        jungleLowerLeft = new Vector2d( width/2-width*junglePercentage/200, height/2-height*junglePercentage/200);
+        jungleUpperRight = new Vector2d(width/2+width*junglePercentage/200,height/2+height*junglePercentage/200);
         jungleArea = new RectangularMap(jungleLowerLeft,jungleUpperRight);
         map = new GrassField(areaOfMap);
         this.animalEnergy=animalEnergy;
+        this.getHowManyAnimalsAtStart= howManyAnimalsAtStart;
         createAnimals(howManyAnimalsAtStart);
         this.grassEnergy=grassEnergy;
         this.width=width;
@@ -123,6 +127,7 @@ public class Simulation {
                 }
                 Animal baby = animalsAtPosition.get(x).breed(animalsAtPosition.get(y),map.getSurroundedPosition(entry.getKey()),day);
                 if(baby!=null) {
+
                     this.howManyAnimals++;
                     map.addAnimal(baby);
                 }
@@ -198,12 +203,13 @@ public class Simulation {
     }
     public int getDominatingGene(){
         int max = -1;
+        List<Integer> gen = new ArrayList<>();
         for(int i=0;i<8;i++){
             if(this.dominatingGenotype[i]>max) max = this.dominatingGenotype[i];
         }
         for(int i=0;i<8;i++){
-            if(this.dominatingGenotype[i]==max) return i;
+            if(this.dominatingGenotype[i]==max)gen.add(i);
         }
-        return -1;
+        return gen.get(ThreadLocalRandom.current().nextInt(gen.size()));
     }
 }

@@ -1,6 +1,7 @@
 package View;
 
 import agh.cs.DarwinsGame.Animal;
+import agh.cs.DarwinsGame.Simulation;
 import agh.cs.DarwinsGame.Vector2d;
 
 import javax.swing.*;
@@ -9,11 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.Locale;
 
 public class ButtonPanel extends JPanel implements ActionListener {
     private GameMainFrame gameMainFrame;
@@ -22,11 +21,13 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private JButton save;
     private JButton show;
     private JButton pin;
+    private JButton restart;
     private boolean isPaused = false;
     private boolean firstTime = false;
     private boolean firstPin = false;
     public Animal animal;
     public String result;
+
 
     public ButtonPanel(GameMainFrame gameMainFrame){
         this.gameMainFrame = gameMainFrame;
@@ -42,11 +43,14 @@ public class ButtonPanel extends JPanel implements ActionListener {
         this.show.addActionListener(this);
         this.pin = new JButton("Pin animal");
         this.pin.addActionListener(this);
+        this.restart = new JButton("RESTART SIMULATION");
+        this.restart.addActionListener(this);
         add(this.start);
         add(this.stop);
         add(this.save);
         add(this.show);
         add(this.pin);
+        add(this.restart);
     }
 
 
@@ -126,7 +130,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             gameMainFrame.gamePanel.repaint();
         }
         else if(source == this.pin && isPaused){
-            if(!this.firstPin)
+            if(!this.firstPin){
                 this.firstPin=true;
                 gameMainFrame.frame.addMouseListener(new MouseListener() {
                     @Override
@@ -154,7 +158,6 @@ public class ButtonPanel extends JPanel implements ActionListener {
                                 if(result != null && result.length() > 0){
                                     animal = animals.get(0);
                                     gameMainFrame.dataPanel.updateData();
-
                                     break;
                             }}}
                     }}
@@ -179,12 +182,18 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
                     }
                 });
+
             if(animal==null){
                 firstPin=false;
             }
             if(animal!=null){
                 JOptionPane.showMessageDialog(null,"You have already pinned!");
             }
+
         }
-    }
+        else if(source==this.restart){
+            gameMainFrame = new GameMainFrame(new Simulation(gameMainFrame.simulation.width,gameMainFrame.simulation.height,gameMainFrame.simulation.getHowManyAnimalsAtStart,gameMainFrame.simulation.animalEnergy,gameMainFrame.simulation.grassEnergy,gameMainFrame.simulation.moveEnergyCost,gameMainFrame.simulation.junglePercentage,gameMainFrame.simulation.delay));
+            gameMainFrame.startSimulation();
+        }
+    }}
 }

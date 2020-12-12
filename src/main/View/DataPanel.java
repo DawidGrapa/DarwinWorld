@@ -6,6 +6,7 @@ import agh.cs.DarwinsGame.Simulation;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import java.awt.*;
 
 
 public class DataPanel extends JPanel {
@@ -21,18 +22,20 @@ public class DataPanel extends JPanel {
     private JLabel pinnedChilds = new JLabel();
     private JLabel pinnedDead = new JLabel();
     private JLabel pinnedAncestors = new JLabel();
-    private ButtonPanel buttonPanel;
+    public ButtonPanel buttonPanel;
     private JLabel pinned = new JLabel();
 
 
     public DataPanel(Simulation simulation,GameMainFrame gameMainFrame){
         this.simulation=simulation;
         this.gameMainFrame=gameMainFrame;
-
         setSize(700,300);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
-
+        setBackground(new Color(220, 171, 119, 255));
+        EmptyBorder border1 = new EmptyBorder(40, 0, 10, 0);
+        EmptyBorder border2 = new EmptyBorder(0, 0, 20, 0);
         this.days.setText("Day: "+this.simulation.day);
+        this.days.setBorder(border1);
         add(this.days);
         this.animals.setText("Animals: "+this.simulation.howManyAnimals);
         add(this.animals);
@@ -52,10 +55,13 @@ public class DataPanel extends JPanel {
         add(this.pinnedChilds);
         add(this.pinnedAncestors);
         add(this.pinnedDead);
+        pinnedDead.setBorder(border2);
         this.buttonPanel = new ButtonPanel(this.gameMainFrame);
         add(this.buttonPanel);
     }
     public void updateData(){
+        setFocusable(true);
+        setBackground(new Color(220, 171, 119, 255));
         this.days.setText("Day: "+this.simulation.day);
         this.animals.setText("Animals: "+this.simulation.howManyAnimals);
         this.grasses.setText("Grasses: "+this.simulation.getMap().getGrassHashMap().size());
@@ -69,6 +75,7 @@ public class DataPanel extends JPanel {
         this.pinnedAncestors.setText(buttonPanel.result+" has had "+buttonPanel.animal.howManyAncestors+" ancestors");
         if(buttonPanel.animal.dead())
             this.pinnedDead.setText(buttonPanel.result+" has died on day "+buttonPanel.animal.deathDay+" [*]");
-    }}
+        else this.pinnedDead.setText("Still alive :))");
+        }}
 
 }

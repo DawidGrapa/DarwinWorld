@@ -2,6 +2,8 @@ package agh.cs.DarwinsGame;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Animal {
     private MapDirection direction;
@@ -88,13 +90,16 @@ public class Animal {
 
     public int getBestGene(){
         int max = -1;
+        List<Integer> gen = new ArrayList<>();
         for(int i=0;i<8;i++){
             if(this.genotype.isThereEveryGene[i]>max) max = this.genotype.isThereEveryGene[i];
         }
         for(int i=0;i<8;i++){
-            if(this.genotype.isThereEveryGene[i]==max) {System.out.println(i);return i;}
+            if(this.genotype.isThereEveryGene[i]==max) {
+                gen.add(i);
+            }
         }
-        return -1;
+        return gen.get(ThreadLocalRandom.current().nextInt(gen.size()));
     }
 
     public static class buildNewAnimal{             //here i build new animal with some parameters or without
