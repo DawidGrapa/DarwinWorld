@@ -5,6 +5,7 @@ import agh.cs.DarwinsGame.Simulation;
 
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 
 
 public class DataPanel extends JPanel {
@@ -17,14 +18,18 @@ public class DataPanel extends JPanel {
     private JLabel averageAlive = new JLabel();
     private JLabel averageDead = new JLabel();
     private JLabel childs = new JLabel();
+    private JLabel pinnedChilds = new JLabel();
+    private JLabel pinnedDead = new JLabel();
+    private JLabel pinnedAncestors = new JLabel();
     private ButtonPanel buttonPanel;
+    private JLabel pinned = new JLabel();
 
 
     public DataPanel(Simulation simulation,GameMainFrame gameMainFrame){
         this.simulation=simulation;
         this.gameMainFrame=gameMainFrame;
 
-        setSize(700,500);
+        setSize(700,300);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
 
         this.days.setText("Day: "+this.simulation.day);
@@ -41,6 +46,12 @@ public class DataPanel extends JPanel {
         add(this.averageDead);
         this.childs.setText("Average number of childs for alive animals: "+simulation.getAverageChild());
         add(this.childs);
+        EmptyBorder border = new EmptyBorder(40, 0, 10, 0);
+        this.pinned.setBorder(border);
+        add(this.pinned);
+        add(this.pinnedChilds);
+        add(this.pinnedAncestors);
+        add(this.pinnedDead);
         this.buttonPanel = new ButtonPanel(this.gameMainFrame);
         add(this.buttonPanel);
     }
@@ -52,6 +63,12 @@ public class DataPanel extends JPanel {
         this.averageDead.setText("Average age for dead animals: "+simulation.getAverageDaysForDeadAnimals());
         this.childs.setText("Average number of childs for alive animals: "+simulation.getAverageChild());
         this.dominatingGenotype.setText("Dominating gene: "+this.simulation.getDominatingGene());
-    }
+        if(buttonPanel.result!=null){
+        this.pinned.setText("Pinned Animal: ----  "+buttonPanel.result+"  ----");
+        this.pinnedChilds.setText(buttonPanel.result+" has had "+buttonPanel.animal.howManyChildren()+" children");
+        this.pinnedAncestors.setText(buttonPanel.result+" has had "+buttonPanel.animal.howManyAncestors+" ancestors");
+        if(buttonPanel.animal.dead())
+            this.pinnedDead.setText(buttonPanel.result+" has died on day "+buttonPanel.animal.deathDay+" [*]");
+    }}
 
 }

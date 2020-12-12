@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class ButtonPanel extends JPanel implements ActionListener {
     private GameMainFrame gameMainFrame;
@@ -20,9 +21,12 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private JButton stop;
     private JButton save;
     private JButton show;
+    private JButton pin;
     private boolean isPaused = false;
     private boolean firstTime = false;
-
+    private boolean firstPin = false;
+    public Animal animal;
+    public String result;
 
     public ButtonPanel(GameMainFrame gameMainFrame){
         this.gameMainFrame = gameMainFrame;
@@ -36,10 +40,13 @@ public class ButtonPanel extends JPanel implements ActionListener {
         this.save.addActionListener(this);
         this.show = new JButton("Show animals with dominating gene");
         this.show.addActionListener(this);
+        this.pin = new JButton("Pin animal");
+        this.pin.addActionListener(this);
         add(this.start);
         add(this.stop);
         add(this.save);
         add(this.show);
+        add(this.pin);
     }
 
 
@@ -117,6 +124,67 @@ public class ButtonPanel extends JPanel implements ActionListener {
             }
         else if(source==this.show && isPaused){
             gameMainFrame.gamePanel.repaint();
+        }
+        else if(source == this.pin && isPaused){
+            if(!this.firstPin)
+                this.firstPin=true;
+                gameMainFrame.frame.addMouseListener(new MouseListener() {
+                    @Override
+                    public void mouseClicked(MouseEvent e) {
+                        if(isPaused && animal==null){
+                            int x=e.getX();
+                            if(x>gameMainFrame.frame.getWidth()/2)
+                                x=x-gameMainFrame.frame.getWidth()/2;
+                            else return;
+                            int y=e.getY();
+                            x=x/ gameMainFrame.gamePanel.widthScale;
+                            y=(y-28)/ gameMainFrame.gamePanel.heightScale;
+                            List<Animal> animals = gameMainFrame.simulation.getMap().getAnimalsHashMap().get(new Vector2d(x,y));
+                            if(animals!=null) {
+                                while (true){
+                                result = (String)JOptionPane.showInputDialog(
+                                        null,
+                                        "Type name for your pinned animal",
+                                        "Naming animal",
+                                        JOptionPane.PLAIN_MESSAGE,
+                                        null,
+                                        null,
+                                        ""
+                                );
+                                if(result != null && result.length() > 0){
+                                    animal = animals.get(0);
+                                    gameMainFrame.dataPanel.updateData();
+
+                                    break;
+                            }}}
+                    }}
+
+                    @Override
+                    public void mousePressed(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseReleased(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+
+                    }
+
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+
+                    }
+                });
+            if(animal==null){
+                firstPin=false;
+            }
+            if(animal!=null){
+                JOptionPane.showMessageDialog(null,"You have already pinned!");
+            }
         }
     }
 }

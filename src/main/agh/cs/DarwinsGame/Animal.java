@@ -8,7 +8,7 @@ public class Animal {
     public ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
     private Genotype genotype;
     public int birthDay;
-    int deathDay = 0;
+    public int deathDay = 0;
     Set<Animal> children = new HashSet<>();
     private int energy;
     private Vector2d position;
@@ -92,7 +92,7 @@ public class Animal {
             if(this.genotype.isThereEveryGene[i]>max) max = this.genotype.isThereEveryGene[i];
         }
         for(int i=0;i<8;i++){
-            if(this.genotype.isThereEveryGene[i]==max) return i;
+            if(this.genotype.isThereEveryGene[i]==max) {System.out.println(i);return i;}
         }
         return -1;
     }
@@ -155,6 +155,9 @@ public class Animal {
         for(IPositionChangeObserver observer : observers){
             observer.positionChanged(oldPosition,newPosition,o);
         }
+    }
+    public boolean dead(){
+        return deathDay!=0;
     }
 
 }

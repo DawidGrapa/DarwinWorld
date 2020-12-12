@@ -15,9 +15,12 @@ public class Genotype {
     Genotype(){
         for(int i=0;i<howManyGenes;i++){
             genes.add(i);
+            isThereEveryGene[i]++;
         }
         for(int i=howManyGenes;i<genomeSize;i++){
-            genes.add(ThreadLocalRandom.current().nextInt(howManyGenes));
+            int x = ThreadLocalRandom.current().nextInt(howManyGenes);
+            genes.add(x);
+            isThereEveryGene[x]++;
         }
         genes.sort(Integer::compareTo);
 
