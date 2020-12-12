@@ -45,21 +45,18 @@ public class GamePanel extends JPanel {
                     simulation.jungleWidth * widthScale,
                     simulation.jungleHeight * heightScale);
 
-            java.util.List<Animal> animalsAtPosition = new ArrayList<>();
-            for (Map.Entry<Vector2d, java.util.List<Animal>> entry : map.getAnimalsHashMap().entrySet()) {
-                animalsAtPosition.addAll(entry.getValue());
-            }
 
-            for (Animal a : animalsAtPosition) {
-                if(a.equals(gameMainFrame.dataPanel.buttonPanel.animal)){
+            for (Map.Entry<Vector2d, java.util.List<Animal>> entry : map.getAnimalsHashMap().entrySet()) {
+                if(entry.getValue().contains(gameMainFrame.dataPanel.buttonPanel.animal)){
                     g.setColor(new Color(255,0,0));
                 }
                 else
-                g.setColor(a.toColor(simulation.animalEnergy));
-                int y = a.getPosition().y * heightScale;
-                int x = a.getPosition().x * widthScale;
+                    g.setColor(entry.getValue().get(0).toColor(simulation.animalEnergy));
+                int y = entry.getValue().get(0).getPosition().y * heightScale;
+                int x = entry.getValue().get(0).getPosition().x * widthScale;
                 g.fillOval(x, y, widthScale, heightScale);
             }
+
 
             for (Grass grass : map.getGrassHashMap().values()) {
                 g.setColor(grass.toColor());

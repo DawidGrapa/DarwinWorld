@@ -7,7 +7,7 @@ import View.GameMainFrame;
 public class World {
     public static void main(String[] args) {
         for(int i=0;i<1;i++){
-            GameMainFrame gameMainFrame = new GameMainFrame(new Simulation(5,5,5,300,20,1,68,10));
+            GameMainFrame gameMainFrame = new GameMainFrame(new Simulation(5,5,4,300,20,1,68,1000));
             gameMainFrame.startSimulation();
         }
     }
