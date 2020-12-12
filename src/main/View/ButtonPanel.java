@@ -130,7 +130,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             gameMainFrame.gamePanel.repaint();
         }
         else if(source == this.pin && isPaused){
-            if(!this.firstPin){
+            if(!this.firstPin)
                 this.firstPin=true;
                 gameMainFrame.frame.addMouseListener(new MouseListener() {
                     @Override
@@ -195,5 +195,5 @@ public class ButtonPanel extends JPanel implements ActionListener {
             gameMainFrame = new GameMainFrame(new Simulation(gameMainFrame.simulation.width,gameMainFrame.simulation.height,gameMainFrame.simulation.getHowManyAnimalsAtStart,gameMainFrame.simulation.animalEnergy,gameMainFrame.simulation.grassEnergy,gameMainFrame.simulation.moveEnergyCost,gameMainFrame.simulation.junglePercentage,gameMainFrame.simulation.delay));
             gameMainFrame.startSimulation();
         }
-    }}
+    }
 }
