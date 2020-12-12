@@ -33,7 +33,7 @@ public class DataPanel extends JPanel {
         add(this.animals);
         this.grasses.setText("Grasses: "+this.simulation.getMap().getGrassHashMap().size());
         add(this.grasses);
-        this.dominatingGenotype.setText("Dominating Genotype: "+0);
+        this.dominatingGenotype.setText("Dominating gene: "+this.simulation.getDominatingGene());
         add(this.dominatingGenotype);
         this.averageAlive.setText("Average energy for alive animals: "+simulation.getAverageEnergy());
         add(this.averageAlive);
@@ -51,6 +51,7 @@ public class DataPanel extends JPanel {
         this.averageAlive.setText("Average energy for alive animals: "+simulation.getAverageEnergy());
         this.averageDead.setText("Average age for dead animals: "+simulation.getAverageDaysForDeadAnimals());
         this.childs.setText("Average number of childs for alive animals: "+simulation.getAverageChild());
+        this.dominatingGenotype.setText("Dominating gene: "+this.simulation.getDominatingGene());
     }
 
 }

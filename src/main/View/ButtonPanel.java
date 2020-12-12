@@ -19,6 +19,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private JButton start;
     private JButton stop;
     private JButton save;
+    private JButton show;
     private boolean isPaused = false;
     private boolean firstTime = false;
 
@@ -26,16 +27,19 @@ public class ButtonPanel extends JPanel implements ActionListener {
     public ButtonPanel(GameMainFrame gameMainFrame){
         this.gameMainFrame = gameMainFrame;
         setPreferredSize(new Dimension(700,0));
-        setLayout(new FlowLayout(FlowLayout.CENTER,50,50));
+        setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
         this.start = new JButton("Start");
         this.stop = new JButton("Stop");
         this.start.addActionListener(this);
         this.stop.addActionListener(this);
         this.save = new JButton("SAVE");
         this.save.addActionListener(this);
+        this.show = new JButton("Show animals with dominating gene");
+        this.show.addActionListener(this);
         add(this.start);
         add(this.stop);
         add(this.save);
+        add(this.show);
     }
 
 
@@ -100,7 +104,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
                 FileWriter myWriter = new FileWriter("Zapis.txt");
                 myWriter.write("Day: "+this.gameMainFrame.simulation.day+"\n"+"Animals: "+this.gameMainFrame.simulation.howManyAnimals+
                         "\n"+"Grasses: "+this.gameMainFrame.simulation.getMap().getGrassHashMap().size()+"\n"+
-                        "Average energy for alive animals: "+gameMainFrame.simulation.getAverageEnergy()+"\n"+"Average age for dead animals: "
+                        "Average energy for alive animals: "+gameMainFrame.simulation.getAverageEnergy()+"\n"+"Dominating gene: "+gameMainFrame.simulation.getDominatingGene()+"\n"+"Average age for dead animals: "
                         +gameMainFrame.simulation.getAverageDaysForDeadAnimals()+"\n"+
                         "Average number of childs for alive animals: "+gameMainFrame.simulation.getAverageChild());
                 myWriter.close();
@@ -111,5 +115,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
                 a.printStackTrace();
             }
             }
+        else if(source==this.show && isPaused){
+            gameMainFrame.gamePanel.repaint();
+        }
     }
 }

@@ -23,6 +23,7 @@ public class Simulation {
     private int howManyDaysForDeadAnimals=0;
     private int averageChild;
     public int delay;
+    public int [] dominatingGenotype  = new int[8];
 
 
     public Simulation(int width,int height,int howManyAnimalsAtStart,int animalEnergy,int grassEnergy,int moveEnergyCost,int junglePrecentage,int delay){
@@ -83,11 +84,13 @@ public class Simulation {
     void moveAnimals(Map<Vector2d,List<Animal>> animals){
         this.averageEnergy=0;
         this.averageChild=0;
+        this.dominatingGenotype= new int[8];
         List<Animal> animalsAtPosition = new ArrayList<>();
         for(Map.Entry<Vector2d,List<Animal>> entry : animals.entrySet()){
             animalsAtPosition.addAll(entry.getValue());
         }
         for(Animal animal : animalsAtPosition){
+            dominatingGenotype[animal.getBestGene()]++;
             averageChild+=animal.howManyChildren();
             averageEnergy+=animal.getEnergy();
             animal.move();
@@ -192,5 +195,15 @@ public class Simulation {
         return averageChild/howManyAnimals;
         else
             return 0;
+    }
+    public int getDominatingGene(){
+        int max = -1;
+        for(int i=0;i<8;i++){
+            if(this.dominatingGenotype[i]>max) max = this.dominatingGenotype[i];
+        }
+        for(int i=0;i<8;i++){
+            if(this.dominatingGenotype[i]==max) return i;
+        }
+        return -1;
     }
 }

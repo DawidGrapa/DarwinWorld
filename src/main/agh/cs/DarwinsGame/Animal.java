@@ -1,9 +1,7 @@
 package agh.cs.DarwinsGame;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class Animal {
     private MapDirection direction;
@@ -86,6 +84,17 @@ public class Animal {
         }
         return baby;
 
+    }
+
+    public int getBestGene(){
+        int max = -1;
+        for(int i=0;i<8;i++){
+            if(this.genotype.isThereEveryGene[i]>max) max = this.genotype.isThereEveryGene[i];
+        }
+        for(int i=0;i<8;i++){
+            if(this.genotype.isThereEveryGene[i]==max) return i;
+        }
+        return -1;
     }
 
     public static class buildNewAnimal{             //here i build new animal with some parameters or without
