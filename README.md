@@ -6,12 +6,12 @@ DARWIN WORLD
 
 ##### So how does it all work?
 
--Animals roam the map. When they stand on a grass field, it is eaten, and the animal gains energy.
--When two animals meet, and they have enough energy, they breed, producing offspring.
--The less energy the animal has, the whiter it becomes.
--If animal runs out of energy, it dies.
--There are two types of land: jungle and steppe
--Everyday, two grasses are generated, one on each land
+- Animals roam the map. When they stand on a grass field, it is eaten, and the animal gains energy.
+- When two animals meet, and they have enough energy, they breed, producing offspring.
+- The less energy the animal has, the whiter it becomes.
+- If animal runs out of energy, it dies.
+- There are two types of land: jungle and steppe
+- Everyday, two grasses are generated, one on each land
 
 
 
