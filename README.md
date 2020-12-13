@@ -21,4 +21,4 @@ Simulation starts with parameters written to parameters.json. You can stop it by
 - press animal to show some data about it
 - save current data to .txt file using SAVE button
 - show animals with dominating genotype (they will illumiante yellow)
-- pin animal by pressing it and show data about it (you will be able to type its name)
+- pin animal by pressing it and show data about it --> then it will illuminate red (you will be able to type its name)
