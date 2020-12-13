@@ -1,7 +1,7 @@
 package View;
 
 import agh.cs.DarwinsGame.Simulation;
-import agh.cs.DarwinsGame.Vector2d;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
 
 public class GameMainFrame implements ActionListener {
     public Simulation simulation;
-    public Simulation tempSim;
     public JFrame frame;
     public Timer timer;
     public GamePanel gamePanel;

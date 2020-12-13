@@ -53,6 +53,7 @@ public class Simulation {
         Map<Vector2d,Grass> grasses = map.getGrassHashMap();
         removeDeadAnimals(animals);
         moveAnimals(animals);
+        removeDeadAnimals(animals);
         animals=map.getAnimalsHashMap();
         eatGrass(animals,grasses);
         breedAnimals(animals);

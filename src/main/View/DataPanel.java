@@ -22,6 +22,7 @@ public class DataPanel extends JPanel {
     private JLabel pinnedChilds = new JLabel();
     private JLabel pinnedDead = new JLabel();
     private JLabel pinnedAncestors = new JLabel();
+    private JLabel pinnedEnergy = new JLabel();
     public ButtonPanel buttonPanel;
     private JLabel pinned = new JLabel();
 
@@ -52,6 +53,7 @@ public class DataPanel extends JPanel {
         EmptyBorder border = new EmptyBorder(40, 0, 10, 0);
         this.pinned.setBorder(border);
         add(this.pinned);
+        add(this.pinnedEnergy);
         add(this.pinnedChilds);
         add(this.pinnedAncestors);
         add(this.pinnedDead);
@@ -70,6 +72,7 @@ public class DataPanel extends JPanel {
         this.childs.setText("Average number of childs for alive animals: "+simulation.getAverageChild());
         this.dominatingGenotype.setText("Dominating gene: "+this.simulation.getDominatingGene());
         if(buttonPanel.result!=null){
+            this.pinnedEnergy.setText(buttonPanel.result+"'s energy: "+buttonPanel.animal.getEnergy());
         this.pinned.setText("Pinned Animal: ----  "+buttonPanel.result+"  ----  It is red RN");
         this.pinnedChilds.setText(buttonPanel.result+" has had "+buttonPanel.animal.howManyChildren()+" children");
         this.pinnedAncestors.setText(buttonPanel.result+" has had "+buttonPanel.animal.howManyAncestors+" ancestors");

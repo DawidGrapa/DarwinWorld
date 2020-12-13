@@ -192,6 +192,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
         }
         else if(source==this.restart){
+            gameMainFrame.frame.dispose();
             gameMainFrame = new GameMainFrame(new Simulation(gameMainFrame.simulation.width,gameMainFrame.simulation.height,gameMainFrame.simulation.getHowManyAnimalsAtStart,gameMainFrame.simulation.animalEnergy,gameMainFrame.simulation.grassEnergy,gameMainFrame.simulation.moveEnergyCost,gameMainFrame.simulation.junglePercentage,gameMainFrame.simulation.delay));
             gameMainFrame.startSimulation();
         }

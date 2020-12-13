@@ -5,6 +5,8 @@ import java.util.*;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import Config.Config;
+
 public class Animal {
     private MapDirection direction;
     public ArrayList<IPositionChangeObserver> observers = new ArrayList<>();
@@ -74,7 +76,7 @@ public class Animal {
         Animal parent1 = this;
         Animal parent2 = secondParent;
         Animal baby = null;
-        if(parent1.energy>10 && parent2.energy>10){
+        if(parent1.energy> Config.getInstance().getAnimalEnergy()/2 && parent2.energy>Config.getInstance().getAnimalEnergy()/2){
             int energy =  parent1.energy / 4 + parent2.energy / 4;
             parent1.decreaseEnergy(parent1.energy/4);
             parent2.decreaseEnergy(parent2.energy/4);
@@ -107,6 +109,7 @@ public class Animal {
         private int energy = 10;
         private Vector2d position;
         private int birthDay;
+
         private MapDirection direction = MapDirection.getRandom();
 
         public buildNewAnimal withEnergy(int energy){
@@ -125,6 +128,7 @@ public class Animal {
             this.genotype=genotype;
             return this;
         }
+
         public Animal build(){
             Animal animal = new Animal();
             animal.genotype=genotype;
