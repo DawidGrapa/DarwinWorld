@@ -96,7 +96,9 @@ public class Simulation {
             animalsAtPosition.addAll(entry.getValue());
         }
         for(Animal animal : animalsAtPosition){
-            dominatingGenotype[animal.getBestGene()]++;
+            List<Integer> genes = animal.getBestGene();
+            for(int i=0;i<genes.size();i++)
+            dominatingGenotype[genes.get(i)]++;
             averageChild+=animal.howManyChildren();
             averageEnergy+=animal.getEnergy();
             animal.move();

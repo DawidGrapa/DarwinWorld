@@ -89,7 +89,7 @@ public class Animal {
 
     }
 
-    public int getBestGene(){
+    public List<Integer> getBestGene(){
         int max = -1;
         List<Integer> gen = new ArrayList<>();
         for(int i=0;i<8;i++){
@@ -100,7 +100,7 @@ public class Animal {
                 gen.add(i);
             }
         }
-        return gen.get(ThreadLocalRandom.current().nextInt(gen.size()));
+        return gen;
     }
 
     public static class buildNewAnimal{             //here i build new animal with some parameters or without

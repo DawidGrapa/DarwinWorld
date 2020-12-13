@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GamePanel extends JPanel {
     Simulation simulation;
@@ -67,6 +68,7 @@ public class GamePanel extends JPanel {
 
         }
         else {
+            int gen = simulation.getDominatingGene();
             g.setColor(new Color(171, 210, 156));
             g.fillRect(0, 0, width, height);
 
@@ -89,7 +91,7 @@ public class GamePanel extends JPanel {
             }
 
             for (Animal a : animalsAtPosition) {
-                if(a.getBestGene()==simulation.getDominatingGene()){
+                if(a.getBestGene().contains(gen)){
                     g.setColor(new Color(255, 230, 0));
                     int y = a.getPosition().y * heightScale;
                     int x = a.getPosition().x * widthScale;
