@@ -37,6 +37,7 @@ public class Simulation {
         jungleArea = new RectangularMap(jungleLowerLeft,jungleUpperRight);
         map = new GrassField(areaOfMap);
         this.animalEnergy=animalEnergy;
+        if(howManyAnimalsAtStart>width*height) howManyAnimalsAtStart=width*height;
         this.getHowManyAnimalsAtStart= howManyAnimalsAtStart;
         createAnimals(howManyAnimalsAtStart);
         this.grassEnergy=grassEnergy;
@@ -128,7 +129,6 @@ public class Simulation {
                 }
                 Animal baby = animalsAtPosition.get(x).breed(animalsAtPosition.get(y),map.getSurroundedPosition(entry.getKey()),day);
                 if(baby!=null) {
-
                     this.howManyAnimals++;
                     map.addAnimal(baby);
                 }

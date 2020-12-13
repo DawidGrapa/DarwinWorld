@@ -74,17 +74,16 @@ public class Animal {
 
     public Animal breed(Animal secondParent,Vector2d position,int birthDay){
         Animal parent1 = this;
-        Animal parent2 = secondParent;
         Animal baby = null;
-        if(parent1.energy> Config.getInstance().getAnimalEnergy()/2 && parent2.energy>Config.getInstance().getAnimalEnergy()/2){
-            int energy =  parent1.energy / 4 + parent2.energy / 4;
+        if(parent1.energy> Config.getInstance().getAnimalEnergy()/2 && secondParent.energy>Config.getInstance().getAnimalEnergy()/2){
+            int energy =  parent1.energy / 4 + secondParent.energy / 4;
             parent1.decreaseEnergy(parent1.energy/4);
-            parent2.decreaseEnergy(parent2.energy/4);
-            Genotype genotype = new Genotype(parent1,parent2);
+            secondParent.decreaseEnergy(secondParent.energy/4);
+            Genotype genotype = new Genotype(parent1, secondParent);
             baby = Animal.buildAnimal().withPosition(position).withBirthDay(birthDay).withEnergy(energy).withGenotype(genotype).build();
             parent1.children.add(baby);
-            parent2.children.add(baby);
-            baby.howManyAncestors= parent1.howManyAncestors+parent2.howManyAncestors+2;
+            secondParent.children.add(baby);
+            baby.howManyAncestors= parent1.howManyAncestors+ secondParent.howManyAncestors+2;
         }
         return baby;
 
