@@ -30,8 +30,8 @@ public class DataPanel extends JPanel {
     public DataPanel(Simulation simulation,GameMainFrame gameMainFrame){
         this.simulation=simulation;
         this.gameMainFrame=gameMainFrame;
-        setSize(700,300);
         setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
+        setSize(350,300);
         setBackground(new Color(220, 171, 119, 255));
         EmptyBorder border1 = new EmptyBorder(40, 0, 10, 0);
         EmptyBorder border2 = new EmptyBorder(0, 0, 20, 0);

@@ -36,6 +36,7 @@ public class GamePanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         this.map = simulation.getMap();
+        int gen = simulation.getDominatingGene();
         if(gameMainFrame.timer.isRunning()) {
             g.setColor(new Color(171, 210, 156));
             g.fillRect(0, 0, width, height);
@@ -68,7 +69,7 @@ public class GamePanel extends JPanel {
 
         }
         else {
-            int gen = simulation.getDominatingGene();
+            System.out.println(gen);
             g.setColor(new Color(171, 210, 156));
             g.fillRect(0, 0, width, height);
 
@@ -85,24 +86,22 @@ public class GamePanel extends JPanel {
                 g.fillRect(x, y, widthScale, heightScale);
             }
 
-            java.util.List<Animal> animalsAtPosition = new ArrayList<>();
             for (Map.Entry<Vector2d, java.util.List<Animal>> entry : map.getAnimalsHashMap().entrySet()) {
-                animalsAtPosition.addAll(entry.getValue());
-            }
-
-            for (Animal a : animalsAtPosition) {
-                if(a.getBestGene().contains(gen)){
+                for(Animal animal: entry.getValue()){
+                if(animal.getBestGene().contains(gen)){
                     g.setColor(new Color(255, 230, 0));
-                    int y = a.getPosition().y * heightScale;
-                    int x = a.getPosition().x * widthScale;
+                    int y = animal.getPosition().y * heightScale;
+                    int x = animal.getPosition().x * widthScale;
                     g.fillOval(x, y, widthScale, heightScale);
+                    break;
                 }
                 else{
-                g.setColor(a.toColor(simulation.animalEnergy));
-                int y = a.getPosition().y * heightScale;
-                int x = a.getPosition().x * widthScale;
+                g.setColor(entry.getValue().get(0).toColor(simulation.animalEnergy));
+                int y = entry.getValue().get(0).getPosition().y * heightScale;
+                int x = entry.getValue().get(0).getPosition().x * widthScale;
                 g.fillOval(x, y, widthScale, heightScale);
-            }}
+                break;
+            }}}
 
         }
 

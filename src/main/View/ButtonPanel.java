@@ -25,6 +25,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private boolean isPaused = false;
     private boolean firstTime = false;
     private boolean firstPin = false;
+    private boolean firstShow = false;
     public Animal animal;
     public String result;
 
@@ -51,6 +52,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
         add(this.show);
         add(this.pin);
         add(this.restart);
+
     }
 
 
@@ -60,6 +62,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
         if(source == this.start && isPaused){
             this.gameMainFrame.timer.start();
             this.isPaused=false;
+            this.firstShow=false;
         }
         else if(source == this.stop && !isPaused){
             this.gameMainFrame.timer.stop();
@@ -126,7 +129,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
                 a.printStackTrace();
             }
             }
-        else if(source==this.show && isPaused){
+        else if(source==this.show && isPaused && !this.firstShow){
+            this.firstShow=true;
             gameMainFrame.gamePanel.repaint();
         }
         else if(source == this.pin && isPaused){
