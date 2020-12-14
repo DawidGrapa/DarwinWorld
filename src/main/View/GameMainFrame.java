@@ -47,7 +47,7 @@ public class GameMainFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         simulation.simulate();
-        dataPanel.updateData();
         gamePanel.repaint();
+        dataPanel.updateData();
     }
 }

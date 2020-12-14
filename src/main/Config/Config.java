@@ -16,6 +16,7 @@ public class Config {
     private int junglePercentage;
     private int delayTime;
     private int howManyMaps;
+    public boolean show = false;
 
     public static Config getInstance() {
         if (instance == null) {
@@ -68,5 +69,8 @@ public class Config {
     public int getAnimalEnergy() {
         if(animalEnergy<0) throw new IllegalArgumentException("Zla energia poczatkowa zwierzaka..");
         return this.animalEnergy;
+    }
+    public void swapShow(){
+        this.show = true;
     }
 }

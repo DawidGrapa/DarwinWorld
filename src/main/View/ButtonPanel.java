@@ -1,5 +1,6 @@
 package View;
 
+import Config.Config;
 import agh.cs.DarwinsGame.Animal;
 import agh.cs.DarwinsGame.Simulation;
 import agh.cs.DarwinsGame.Vector2d;
@@ -66,6 +67,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
         }
         else if(source == this.stop && !isPaused){
             this.gameMainFrame.timer.stop();
+            this.isPaused=true;
             if(!this.firstTime)
             gameMainFrame.frame.addMouseListener(new MouseListener() {
                 @Override
@@ -110,7 +112,6 @@ public class ButtonPanel extends JPanel implements ActionListener {
                 }
             });
             this.firstTime = true;
-            this.isPaused=true;
         }
         else if(source == this.save && isPaused){
             try {
@@ -130,7 +131,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             }
             }
         else if(source==this.show && isPaused && !this.firstShow){
-            this.firstShow=true;
+            Config.getInstance().show=true;
             gameMainFrame.gamePanel.repaint();
         }
         else if(source == this.pin && isPaused){

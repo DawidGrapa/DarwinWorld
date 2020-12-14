@@ -1,5 +1,6 @@
 package View;
 
+import Config.Config;
 import agh.cs.DarwinsGame.*;
 
 import javax.swing.*;
@@ -37,7 +38,7 @@ public class GamePanel extends JPanel {
         super.paintComponent(g);
         this.map = simulation.getMap();
         int gen = simulation.getDominatingGene();
-        if(gameMainFrame.timer.isRunning()) {
+        if(gameMainFrame.timer.isRunning() || !Config.getInstance().show) {
             g.setColor(new Color(171, 210, 156));
             g.fillRect(0, 0, width, height);
 
@@ -68,8 +69,7 @@ public class GamePanel extends JPanel {
             }
 
         }
-        else {
-            System.out.println(gen);
+        else if(!gameMainFrame.timer.isRunning() && Config.getInstance().show){
             g.setColor(new Color(171, 210, 156));
             g.fillRect(0, 0, width, height);
 
@@ -102,7 +102,7 @@ public class GamePanel extends JPanel {
                 g.fillOval(x, y, widthScale, heightScale);
                 break;
             }}}
-
+            Config.getInstance().show=false;
         }
 
     }
