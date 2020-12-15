@@ -17,7 +17,7 @@ public class Config {
     private int junglePercentage;
     private int delayTime;
     private int howManyMaps;
-    private int toolbarSize;
+    private int toolbarSize = 28;
     public boolean show = false; //potrzebne do przerysowywania mapy, poniewaz gdy delay <=50
     //to program nie nadaza i przeskakuje o jeden krok za duzo
     public boolean pinning = false; //gdy ktos nacisnie pin animal a potem nie kliknie zwierzaka tylko start
@@ -78,8 +78,6 @@ public class Config {
         this.show = true;
     }
     public int getToolbarSize(){
-        Dimension scrsize = Toolkit.getDefaultToolkit().getScreenSize();
-        Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
-        return scrsize.height-winSize.height;
+        return this.toolbarSize;
     }
 }
