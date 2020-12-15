@@ -16,7 +16,9 @@ public class Config {
     private int junglePercentage;
     private int delayTime;
     private int howManyMaps;
-    public boolean show = false;
+    public boolean show = false; //potrzebne do przerysowywania mapy, poniewaz gdy delay <=50
+    //to program nie nadaza i przeskakuje o jeden krok za duzo
+    public boolean pinning = false; //gdy ktos nacisnie pin animal a potem nie kliknie zwierzaka tylko start
 
     public static Config getInstance() {
         if (instance == null) {

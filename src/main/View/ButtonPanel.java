@@ -14,6 +14,7 @@ import java.awt.event.MouseListener;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class ButtonPanel extends JPanel implements ActionListener {
     private GameMainFrame gameMainFrame;
@@ -26,9 +27,9 @@ public class ButtonPanel extends JPanel implements ActionListener {
     private boolean isPaused = false;
     private boolean firstTime = false;
     private boolean firstPin = false;
-    private boolean firstShow = false;
     public Animal animal;
     public String result;
+    int i=0;
 
 
     public ButtonPanel(GameMainFrame gameMainFrame){
@@ -63,7 +64,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
         if(source == this.start && isPaused){
             this.gameMainFrame.timer.start();
             this.isPaused=false;
-            this.firstShow=false;
+            Config.getInstance().pinning = false;
         }
         else if(source == this.stop && !isPaused){
             this.gameMainFrame.timer.stop();
@@ -72,7 +73,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             gameMainFrame.frame.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    if(isPaused){
+                    if(isPaused && !Config.getInstance().pinning){
                         int x=e.getX();
                         if(x>gameMainFrame.frame.getWidth()/2)
                             x=x-gameMainFrame.frame.getWidth()/2;
@@ -82,7 +83,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
                         y=(y-28)/ gameMainFrame.gamePanel.heightScale;
                         List<Animal> animals = gameMainFrame.simulation.getMap().getAnimalsHashMap().get(new Vector2d(x,y));
                         if(animals!=null) {
-                            Animal animal = animals.get(0);
+                            Animal animal = animals.get(ThreadLocalRandom.current().nextInt(animals.size()));
                             JOptionPane.showMessageDialog(null,"Genes: "+
                                     animal.getGenotype().genes.toString()+"\n\nThis animal has had "
                                     +animal.howManyChildren()+" children"+"\n\nThis animal has had "
@@ -116,7 +117,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
         else if(source == this.save && isPaused){
             try {
 
-                FileWriter myWriter = new FileWriter("Zapis.txt");
+                FileWriter myWriter = new FileWriter(i+"Zapis.txt"); i++;
                 myWriter.write("Day: "+this.gameMainFrame.simulation.day+"\n"+"Animals: "+this.gameMainFrame.simulation.howManyAnimals+
                         "\n"+"Grasses: "+this.gameMainFrame.simulation.getMap().getGrassHashMap().size()+"\n"+
                         "Average energy for alive animals: "+gameMainFrame.simulation.getAverageEnergy()+"\n"+"Dominating gene: "+gameMainFrame.simulation.getDominatingGene()+"\n"+"Average age for dead animals: "
@@ -130,42 +131,46 @@ public class ButtonPanel extends JPanel implements ActionListener {
                 a.printStackTrace();
             }
             }
-        else if(source==this.show && isPaused && !this.firstShow){
+        else if(source==this.show && isPaused){
             Config.getInstance().show=true;
             gameMainFrame.gamePanel.repaint();
         }
         else if(source == this.pin && isPaused){
-            if(!this.firstPin)
-                this.firstPin=true;
+            Config.getInstance().pinning = true;
+            if(!this.firstPin) {
                 gameMainFrame.frame.addMouseListener(new MouseListener() {
                     @Override
                     public void mouseClicked(MouseEvent e) {
-                        if(isPaused && animal==null){
-                            int x=e.getX();
-                            if(x>gameMainFrame.frame.getWidth()/2)
-                                x=x-gameMainFrame.frame.getWidth()/2;
+                        if (isPaused && animal == null && Config.getInstance().pinning) {
+                            int x = e.getX();
+                            if (x > gameMainFrame.frame.getWidth() / 2)
+                                x = x - gameMainFrame.frame.getWidth() / 2;
                             else return;
-                            int y=e.getY();
-                            x=x/ gameMainFrame.gamePanel.widthScale;
-                            y=(y-28)/ gameMainFrame.gamePanel.heightScale;
-                            List<Animal> animals = gameMainFrame.simulation.getMap().getAnimalsHashMap().get(new Vector2d(x,y));
-                            if(animals!=null) {
-                                while (true){
-                                result = (String)JOptionPane.showInputDialog(
-                                        null,
-                                        "Type name for your pinned animal",
-                                        "Naming animal",
-                                        JOptionPane.PLAIN_MESSAGE,
-                                        null,
-                                        null,
-                                        ""
-                                );
-                                if(result != null && result.length() > 0){
-                                    animal = animals.get(0);
-                                    gameMainFrame.dataPanel.updateData();
-                                    break;
-                            }}}
-                    }}
+                            int y = e.getY();
+                            x = x / gameMainFrame.gamePanel.widthScale;
+                            y = (y - 28) / gameMainFrame.gamePanel.heightScale;
+                            List<Animal> animals = gameMainFrame.simulation.getMap().getAnimalsHashMap().get(new Vector2d(x, y));
+                            if (animals != null) {
+                                while (true) {
+                                    result = (String) JOptionPane.showInputDialog(
+                                            null,
+                                            "Type name for your pinned animal",
+                                            "Naming animal",
+                                            JOptionPane.PLAIN_MESSAGE,
+                                            null,
+                                            null,
+                                            ""
+                                    );
+                                    if (result != null && result.length() > 0) {
+                                        animal = animals.get(0);
+                                        gameMainFrame.dataPanel.updateData();
+                                        break;
+                                    }
+                                    if (result == null) return;
+                                }
+                            }
+                        }
+                    }
 
                     @Override
                     public void mousePressed(MouseEvent e) {
@@ -187,10 +192,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
 
                     }
                 });
-
-            if(animal==null){
-                firstPin=false;
             }
+            this.firstPin = true;
             if(animal!=null){
                 JOptionPane.showMessageDialog(null,"You have already pinned!");
             }

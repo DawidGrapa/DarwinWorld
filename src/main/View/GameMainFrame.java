@@ -34,9 +34,6 @@ public class GameMainFrame implements ActionListener {
         frame.add(dataPanel);
         frame.add(gamePanel);
         frame.pack();
-
-
-
     }
 
     public void startSimulation(){

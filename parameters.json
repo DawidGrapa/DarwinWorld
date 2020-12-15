@@ -1,11 +1,11 @@
 {
-    "mapWidth": 10,
-    "mapHeight": 10,
-    "animalsAtStart": 20,
+    "mapWidth": 5,
+    "mapHeight": 5,
+    "animalsAtStart": 2,
     "animalEnergy": 300,
     "grassEnergy": 100,
     "moveEnergyCost": 3,
     "junglePercentage": 42,
-    "delayTime": 0,
+    "delayTime": 100,
     "howManyMaps": 1
 }
