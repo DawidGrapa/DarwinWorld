@@ -82,7 +82,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
                         else return;
                         int y=e.getY();
                         x=x/ gameMainFrame.gamePanel.widthScale;
-                        y=(y-Config.getInstance().getToolbarSize()*4/5)/ gameMainFrame.gamePanel.heightScale;
+                        y=(y-Config.getInstance().getToolbarScale())/ gameMainFrame.gamePanel.heightScale;
                         List<Animal> animals = gameMainFrame.simulation.getMap().getAnimalsHashMap().get(new Vector2d(x,y));
                         if(animals!=null) {
                             Animal animal = animals.get(ThreadLocalRandom.current().nextInt(animals.size()));
@@ -153,7 +153,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
                             else return;
                             int y = e.getY();
                             x = x / gameMainFrame.gamePanel.widthScale;
-                            y = (y - Config.getInstance().getToolbarSize()*4/5) / gameMainFrame.gamePanel.heightScale;
+                            y = (y - Config.getInstance().getToolbarScale()) / gameMainFrame.gamePanel.heightScale;
                             List<Animal> animals = gameMainFrame.simulation.getMap().getAnimalsHashMap().get(new Vector2d(x, y));
                             if (animals != null) {
                                 while (true) {
