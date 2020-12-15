@@ -36,6 +36,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
         this.gameMainFrame = gameMainFrame;
         setPreferredSize(new Dimension(700,0));
         setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
+
         this.start = new JButton("Start");
         this.stop = new JButton("Stop");
         this.start.addActionListener(this);
@@ -48,13 +49,13 @@ public class ButtonPanel extends JPanel implements ActionListener {
         this.pin.addActionListener(this);
         this.restart = new JButton("RESTART SIMULATION");
         this.restart.addActionListener(this);
+
         add(this.start);
         add(this.stop);
         add(this.save);
         add(this.show);
         add(this.pin);
         add(this.restart);
-
     }
 
 
@@ -66,6 +67,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             this.isPaused=false;
             Config.getInstance().pinning = false;
         }
+
         else if(source == this.stop && !isPaused){
             this.gameMainFrame.timer.stop();
             this.isPaused=true;
@@ -114,6 +116,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             });
             this.firstTime = true;
         }
+
         else if(source == this.save && isPaused){
             try {
 
@@ -131,10 +134,12 @@ public class ButtonPanel extends JPanel implements ActionListener {
                 a.printStackTrace();
             }
             }
+
         else if(source==this.show && isPaused){
             Config.getInstance().show=true;
             gameMainFrame.gamePanel.repaint();
         }
+
         else if(source == this.pin && isPaused){
             Config.getInstance().pinning = true;
             if(!this.firstPin) {
@@ -199,6 +204,7 @@ public class ButtonPanel extends JPanel implements ActionListener {
             }
 
         }
+
         else if(source==this.restart){
             gameMainFrame.frame.dispose();
             gameMainFrame = new GameMainFrame(new Simulation(gameMainFrame.simulation.width,gameMainFrame.simulation.height,gameMainFrame.simulation.getHowManyAnimalsAtStart,gameMainFrame.simulation.animalEnergy,gameMainFrame.simulation.grassEnergy,gameMainFrame.simulation.moveEnergyCost,gameMainFrame.simulation.junglePercentage,gameMainFrame.simulation.delay));

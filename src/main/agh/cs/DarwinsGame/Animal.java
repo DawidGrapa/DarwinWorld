@@ -3,7 +3,7 @@ package agh.cs.DarwinsGame;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+
 
 import Config.Config;
 
@@ -42,9 +42,8 @@ public class Animal {
         for(int i=0;i<howMany;i++){
             this.direction = this.direction.next();
         }
-        Vector2d ruch = this.direction.toUnit();
         Vector2d oldPosition = this.position;
-        this.position=this.position.add(ruch);
+        this.position=this.position.add(this.direction.toUnit());
         this.positionChanged(oldPosition,this.position,this);
     }
 

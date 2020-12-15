@@ -54,7 +54,6 @@ public class Simulation {
         Map<Vector2d,Grass> grasses = map.getGrassHashMap();
         removeDeadAnimals(animals);
         moveAnimals(animals);
-        removeDeadAnimals(animals);
         animals=map.getAnimalsHashMap();
         eatGrass(animals,grasses);
         breedAnimals(animals);
@@ -149,7 +148,7 @@ public class Simulation {
 
     List<Animal> getListStrongestAnimalToFeed(Map<Vector2d,List<Animal>> animals,Vector2d position){
         List<Animal> animalsAtPosition = animals.get(position);
-        float biggestEnergy = animalsAtPosition.get(0).getEnergy();
+        int biggestEnergy = animalsAtPosition.get(0).getEnergy();
         for(Animal animal : animalsAtPosition){
             if(animal.getEnergy()>biggestEnergy) biggestEnergy=animal.getEnergy();
         }
@@ -162,8 +161,8 @@ public class Simulation {
         return array;
     }
     List<Animal> getListStrongestAnimalToBreed(Map<Vector2d,List<Animal>> animals,Vector2d position){
-        int firstMax=0;
-        int secondMax=0;
+        int firstMax=Integer.MIN_VALUE;
+        int secondMax=Integer.MIN_VALUE;
         List<Animal> arrayWithMax = new ArrayList<>();
         List<Animal> arrayWithSecondMax = new ArrayList<>();
         for(Animal animal : animals.get(position)){
@@ -191,7 +190,9 @@ public class Simulation {
     }
 
     public int getAverageEnergy(){
-        return this.averageEnergy;
+        if(howManyAnimals!=0)
+        return this.averageEnergy/this.howManyAnimals;
+        else return 0;
     }
     public int getAverageDaysForDeadAnimals(){
         if(howManyDeadAnimals!=0)
@@ -205,7 +206,7 @@ public class Simulation {
             return 0;
     }
     public int getDominatingGene(){
-        int max = -1;
+        int max = Integer.MIN_VALUE;
         List<Integer> gen = new ArrayList<>();
         for(int i=0;i<8;i++){
             if(this.dominatingGenotype[i]>max) max = this.dominatingGenotype[i];

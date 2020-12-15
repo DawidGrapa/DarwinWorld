@@ -1,6 +1,5 @@
 package View;
 
-import agh.cs.DarwinsGame.GrassField;
 import agh.cs.DarwinsGame.Simulation;
 
 
