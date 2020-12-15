@@ -2,6 +2,7 @@ package Config;
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
 
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
@@ -16,6 +17,7 @@ public class Config {
     private int junglePercentage;
     private int delayTime;
     private int howManyMaps;
+    private int toolbarSize;
     public boolean show = false; //potrzebne do przerysowywania mapy, poniewaz gdy delay <=50
     //to program nie nadaza i przeskakuje o jeden krok za duzo
     public boolean pinning = false; //gdy ktos nacisnie pin animal a potem nie kliknie zwierzaka tylko start
@@ -74,5 +76,10 @@ public class Config {
     }
     public void swapShow(){
         this.show = true;
+    }
+    public int getToolbarSize(){
+        Dimension scrsize = Toolkit.getDefaultToolkit().getScreenSize();
+        Rectangle winSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        return scrsize.height-winSize.height;
     }
 }
