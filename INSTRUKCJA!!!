@@ -1,9 +1,10 @@
+[ Jeżeli projekt nie wlacza sie prawidlowo, przenoszac nas do Config.java to:
 Na początku potrzebne jest dodanie pliku Gson do naszego projektu.
 Wchodzimy kolejno:
 File -> Project Structure -> Modules -> otwieramy zakładkę Depedencies i malutkim plusikiem wybieramy opcję JARs or Directories -> Wybieramy plik gson-2.6.2.jar,
 który dodałem w folderze projektu. Poglądowy screenshot "1" umieszczam w folderze.
 
-Po wykonaniu tego kroku, projekt jest gotowy do działania.
+Po wykonaniu tego kroku, projekt jest gotowy do działania. ]
 
 W pliku parameters.json ustawiamy początkowe wartości naszego świata. Zapisujemy plik. Otwieramy plik World.java,
 prawym przyciskiem klikamy w okno z kodem, po czym klikamy "run".
@@ -18,6 +19,7 @@ Naszym oczom ukaze się okno ze światem gry. Po zatrzymaniu programu mozemy:
 UWAGA!!!
 Jezeli program wlaczany bedzie na macOS nalezy wejsc w Config.java po czym ustawic private int toolbarSize na 28 lub 32 oraz toolbarScale na 28 lub 32.
 W przypadku windowsa odpowiednio: 40, 32.
+W przypadku Linuxa: 36, 36.
 Jest to spowodowane faktem, iz dzieki temu wysoksoc naszego programu bedzie dopasowana do rozmiaru mapy. W innym wypadku popsuje sie klikanie zwierzat,
 za co najmocniej przepraszam, jednak nie moglem znalezc odpowiedniej funkcji do mierzenia wysokosci toolbara.
 
