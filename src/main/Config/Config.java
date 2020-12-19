@@ -17,8 +17,8 @@ public class Config {
     private int junglePercentage;
     private int delayTime;
     private int howManyMaps;
-    private int toolbarSize = 28;
-    private int toolbarScale = 28;
+    private int toolbarSize = 40;
+    private int toolbarScale = 32;
     public boolean show = false; //potrzebne do przerysowywania mapy, poniewaz gdy delay <=50
     //to program nie nadaza i przeskakuje o jeden krok za duzo
     public boolean pinning = false; //gdy ktos nacisnie pin animal a potem nie kliknie zwierzaka tylko start

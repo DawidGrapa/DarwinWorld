@@ -1,7 +1,0 @@
-Day: 310
-Animals: 33
-Grasses: 18
-Average energy for alive animals: 447
-Dominating gene: 0
-Average age for dead animals: 41
-Average number of childs for alive animals: 2
