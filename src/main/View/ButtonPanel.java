@@ -168,6 +168,8 @@ public class ButtonPanel extends JPanel implements ActionListener {
                                     );
                                     if (result != null && result.length() > 0) {
                                         animal = animals.get(0);
+                                        animal.pinned = true;
+                                        Config.getInstance().springoff=animal.howManyChildren();
                                         gameMainFrame.dataPanel.updateData();
                                         break;
                                     }

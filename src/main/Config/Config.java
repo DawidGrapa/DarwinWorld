@@ -13,6 +13,7 @@ public class Config {
     private int animalsAtStart;
     private int animalEnergy;
     private int grassEnergy;
+    public int springoff;
     private int moveEnergyCost;
     private int junglePercentage;
     private int delayTime;

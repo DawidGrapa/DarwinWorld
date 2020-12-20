@@ -1,6 +1,6 @@
 {
-    "mapWidth": 10,
-    "mapHeight": 100,
+    "mapWidth": 101,
+    "mapHeight": 101,
     "animalsAtStart": 110,
     "animalEnergy": 100,
     "grassEnergy": 100,

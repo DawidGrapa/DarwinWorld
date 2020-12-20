@@ -1,5 +1,6 @@
 package View;
 
+import Config.Config;
 import agh.cs.DarwinsGame.Simulation;
 
 
@@ -22,6 +23,7 @@ public class DataPanel extends JPanel {
     private JLabel pinnedDead = new JLabel();
     private JLabel pinnedAncestors = new JLabel();
     private JLabel pinnedEnergy = new JLabel();
+    private JLabel pinnedSpringoff = new JLabel();
     public ButtonPanel buttonPanel;
     private JLabel pinned = new JLabel();
 
@@ -54,6 +56,7 @@ public class DataPanel extends JPanel {
         add(this.pinned);
         add(this.pinnedEnergy);
         add(this.pinnedChilds);
+        add(this.pinnedSpringoff);
         add(this.pinnedAncestors);
         add(this.pinnedDead);
         pinnedDead.setBorder(border2);
@@ -74,6 +77,7 @@ public class DataPanel extends JPanel {
             this.pinnedEnergy.setText(buttonPanel.result+"'s energy: "+buttonPanel.animal.getEnergy());
         this.pinned.setText("Pinned Animal: ----  "+buttonPanel.result+"  ----  It is red RN");
         this.pinnedChilds.setText(buttonPanel.result+" has had "+buttonPanel.animal.howManyChildren()+" children");
+        this.pinnedSpringoff.setText(buttonPanel.result+" has had "+Config.getInstance().springoff+" springoff");
         this.pinnedAncestors.setText(buttonPanel.result+" has had "+buttonPanel.animal.howManyAncestors+" ancestors");
         if(buttonPanel.animal.dead())
             this.pinnedDead.setText(buttonPanel.result+" has died on day "+buttonPanel.animal.deathDay+" [*]");

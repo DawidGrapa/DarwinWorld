@@ -7,9 +7,9 @@ który dodałem w folderze projektu. Poglądowy screenshot "1" umieszczam w fold
 Po wykonaniu tego kroku, projekt jest gotowy do działania. ]
 
 W pliku parameters.json ustawiamy początkowe wartości naszego świata. Zapisujemy plik. Otwieramy plik World.java,
-prawym przyciskiem klikamy w okno z kodem, po czym klikamy "run".
+uruchamiamy kod.
 
-Naszym oczom ukaze się okno ze światem gry. Po zatrzymaniu programu mozemy:
+Naszym oczom ukaze się okno ze światem gry. Po zatrzymaniu programu mozemy:
 - nacisnąć dowolne zwierzę w celu wyświetlenia o nim informacji
 - podświetlić na zółto zwierzęta z dominującym genotypem
 - wybrać jedno na jedną "rundę" zwierze w celu śledzenia jego historii

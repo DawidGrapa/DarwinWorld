@@ -17,6 +17,7 @@ public class Animal {
     private int energy;
     private Vector2d position;
     public int howManyAncestors=0;
+    public boolean pinned = false;
 
 
     public void setPosition(Vector2d position) {
@@ -82,6 +83,8 @@ public class Animal {
             baby = Animal.buildAnimal().withPosition(position).withBirthDay(birthDay).withEnergy(energy).withGenotype(genotype).build();
             parent1.children.add(baby);
             secondParent.children.add(baby);
+            if(parent1.pinned){ baby.pinned = true; Config.getInstance().springoff+=1;}
+            if(secondParent.pinned) {baby.pinned=true; Config.getInstance().springoff+=1;}
             baby.howManyAncestors= parent1.howManyAncestors+ secondParent.howManyAncestors+2;
         }
         return baby;
