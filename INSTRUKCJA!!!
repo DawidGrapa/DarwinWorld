@@ -16,6 +16,9 @@ Naszym oczom ukaze się okno ze światem gry. Po zatrzymaniu programu mozemy:
 - zapisać dane -> zostaną zapiisane w folderze głownym projektu
 - zrestartować symulacje
 
+Jeżeli w parameters.json wybierzemy pokazywanie 2 map, to obie nałożą się na siebie, przez co
+jedna z nich zasłoni drugą. Należy wtedy odsunąć pierwszą mapę.
+
 UWAGA!!!
 Jezeli program wlaczany bedzie na macOS nalezy wejsc w Config.java po czym ustawic private int toolbarSize na 28 lub 32 oraz toolbarScale na 28 lub 32.
 W przypadku windowsa odpowiednio: 40, 32.
